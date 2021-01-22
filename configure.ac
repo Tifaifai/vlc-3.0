@@ -4014,6 +4014,21 @@ AS_IF([test "${enable_lirc}" = "yes"], [
 AM_CONDITIONAL([HAVE_LIRC], [test "${have_lirc}" = "yes"])
 
 dnl
+dnl  MQTT plugin
+dnl
+AC_ARG_ENABLE(mqtt,
+  [  --enable-mqtt           mqtt support (default disabled)])
+have_mqtt="no"
+AS_IF([test "${enable_mqtt}" = "yes"], [
+  AC_CHECK_HEADER(mosquitto.h, [
+    AC_CHECK_LIB(mosquitto, mosquitto_lib_init, [
+      have_mqtt="yes"
+    ])
+  ])
+])
+AM_CONDITIONAL([HAVE_MQTT], [test "${have_mqtt}" = "yes"])
+
+dnl
 dnl  SRT plugin
 dnl
 PKG_ENABLE_MODULES_VLC([SRT], [access_srt access_output_srt], [srt >= 1.2.2], [SRT input/output plugin], [auto], [], [], [-DENABLE_SRT])

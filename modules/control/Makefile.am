@@ -22,6 +22,12 @@ if HAVE_LIRC
 control_LTLIBRARIES += liblirc_plugin.la
 endif
 
+libmqtt_plugin_la_SOURCES = control/mqtt.c
+libmqtt_plugin_la_LIBADD = -lmosquitto
+if HAVE_MQTT
+control_LTLIBRARIES += libmqtt_plugin.la
+endif
+
 libvlc_motion_la_SOURCES = control/motionlib.c control/motionlib.h
 if HAVE_DARWIN
 libvlc_motion_la_SOURCES += control/unimotion.c control/unimotion.h
